@@ -77,15 +77,18 @@ cd Part-2
 python image_stitcher.py
 ```
 
-The program will iterate over each folder in the `Input` directory. Each folder is expected to have overlapping images in jpg/jpeg format. For each folder, a folder in the `Output` directory will be created, which will contain the keypoints present in each image in the input folder and the final stitched panorama.
+The program will iterate over each folder in the `Input` directory. Each folder is expected to have overlapping images in jpg/jpeg format. For each folder, a folder in the `Output` directory will be created, which will contains three types of images:
+For each folder, three types of images are generated:
+- Keypoints present within an image.
+- Images matching the keypoints between contiguous blocks.
+- Intermediate image after stitching 2 images together, 3 images together and so on, until a panorama is obtained.
+### Key Functions  
 
-### Key Functions
-- `crop_black_borders(image)`: Removes black borders from the stitched image.
-- `draw_and_save_keypoints(images, image_names, output_dir)`: Detects and saves SIFT keypoints.
-- `stitch_images(images, image_names, output_dir)`: Attempts to stitch images using OpenCV’s `Stitcher`.
-- `manual_stitch(images, keypoints_descriptors)`: Manually stitches images using homography.
-- `process_image_sets(input_dir, output_dir, max_width=1200)`: Processes image sets and saves stitched panoramas.
-
+- `crop_black_borders(image)`: Removes black borders from the final stitched image to improve aesthetics.  
+- `draw_and_save_keypoints(images, image_names, output_dir)`: Detects SIFT keypoints, visualizes them with crosses, and saves the modified images.  
+- `draw_matches(img1, kp1, img2, kp2, matches, mask=None)`: Draws feature matches between two images for visualization.  
+- `stitch_images(images, image_names, output_dir)`: Sequentially stitches images using feature matching, homography estimation, and blending.  \
+- `process_image_sets(input_dir, output_dir, max_width=1200)`: Processes multiple image sets, extracts keypoints, and generates stitched panoramas.
 ---
 
 ## Directory Structure
