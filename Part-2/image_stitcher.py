@@ -111,7 +111,7 @@ def process_image_sets(input_dir, output_dir, max_width=1200):
         os.makedirs(set_output_path, exist_ok=True)
         
         # Load images from the current set
-        image_files = sorted(glob.glob(os.path.join(set_input_path, "*.jpg")))
+        image_files = sorted(glob.glob(os.path.join(set_input_path, "*.jpeg")) + glob.glob(os.path.join(set_input_path, "*.jpg")))
         images, image_names = [], []
         
         for file in image_files:
