@@ -101,14 +101,14 @@ def segment_and_save_coins(image_path, output_dir):
                 
                 # Crop coin region and save
                 cropped_coin = isolated_coin[center[1]-radius:center[1]+radius, center[0]-radius:center[0]+radius]
-                cv2.imwrite(os.path.join(coin_output_dir, f"coin-{coin_count}.png"), cropped_coin)
+                save_image(cropped_coin, coin_output_dir, f"coin-{coin_count}")  # Save as JPEG
                 
                 # Mark detected coins on output image
                 cv2.circle(masked_image, center, radius, (255, 255, 0), thickness=-1)
                 coin_count += 1
     
     # Save the segmented coins image
-    cv2.imwrite(os.path.join(output_dir, "segmented-coins.png"), masked_image)
+    save_image(masked_image, output_dir, "segmented-coins")  # Save as JPEG
     print(f"-> Segmented coins saved in '{coin_output_dir}'")
 
 # Count the number of coins in the segmented image
@@ -138,7 +138,7 @@ def process_all_images(input_dir, output_dir):
         shutil.rmtree(output_dir)
     os.makedirs(output_dir)
     
-    image_files = sorted(glob.glob(os.path.join(input_dir, "*.jpeg")))
+    image_files = sorted(glob.glob(os.path.join(input_dir, "*.jpeg")) + glob.glob(os.path.join(input_dir, "*.jpg")))
     
     for file in image_files:
         print(f"Processing {os.path.basename(file)}...")
@@ -170,7 +170,7 @@ def process_all_images(input_dir, output_dir):
         segment_and_save_coins(file, set_output_path)
 
         # Count the number of coins in the segmented coins images
-        count_coins_in_image(os.path.join(set_output_path, "segmented-coins.png"))
+        count_coins_in_image(os.path.join(set_output_path, "segmented-coins.jpg"))
 
         print()
 
