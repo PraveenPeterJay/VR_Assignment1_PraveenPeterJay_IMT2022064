@@ -87,7 +87,7 @@ For each folder, three types of images are generated:
 - `crop_black_borders(image)`: Removes black borders from the final stitched image to improve aesthetics.  
 - `draw_and_save_keypoints(images, image_names, output_dir)`: Detects SIFT keypoints, visualizes them with crosses, and saves the modified images.  
 - `draw_matches(img1, kp1, img2, kp2, matches, mask=None)`: Draws feature matches between two images for visualization.  
-- `stitch_images(images, image_names, output_dir)`: Sequentially stitches images using feature matching, homography estimation, and blending.  \
+- `stitch_images(images, image_names, output_dir)`: Sequentially stitches images using feature matching, homography estimation, and blending.  
 - `process_image_sets(input_dir, output_dir, max_width=1200)`: Processes multiple image sets, extracts keypoints, and generates stitched panoramas.
 ---
 
