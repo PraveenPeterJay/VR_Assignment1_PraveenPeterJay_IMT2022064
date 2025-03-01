@@ -100,6 +100,7 @@ Visual-Recognition-Assignment/
   |-- Output
   |-- image-stitcher.py
 │-- README.md
+|-- Report.pdf
 ```
 
 ---
